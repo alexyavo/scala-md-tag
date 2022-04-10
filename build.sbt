@@ -1,10 +1,8 @@
-import microsites._
-
 name := "scala-md-tag"
 
-version := "0.2.2"
+version := "0.3.0"
 
-scalaVersion := "2.12.6"
+scalaVersion := "2.13.8"
 
 val compilerOptions = Seq(
   "-deprecation",
@@ -28,69 +26,50 @@ resolvers ++= Seq(
 )
 
 val defaultSettings = Seq(
-  version := "0.2.1",
-  scalaVersion := "2.12.6",
-  organization := "pl.muninn",
+  version := "0.3.0",
+  scalaVersion := "2.13.8",
+  organization := "io.github.alexyavo",
   scalacOptions := compilerOptions
 )
 
-val scalaTestVersion = "3.0.5"
+val scalaTestVersion = "3.2.11"
 
-val tests = Seq(
+libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % scalaTestVersion % "test"
 )
 
-lazy val root =
-  (project in file("."))
-    .enablePlugins(MicrositesPlugin)
-    .settings(defaultSettings: _*)
-    .settings(publishSettings: _*)
-    .settings(documentationSettings: _*)
-    .settings(
-      name := "scala-md-tag",
-      libraryDependencies ++= tests,
-      sbtVersion := "1.2.3"
-    )
 
-val username = "OneWebPro"
-val repo = "scala-md-tag"
+// --------------------------------------------------
 
-lazy val documentationSettings = Seq (
-  mdocVariables := Map(
-    "VERSION" -> version.value
-  ),
-  micrositeName := "scala-md-tag",
-  micrositeDescription := "Simple library to generate Markdown Tags",
-  micrositeUrl := "https://plmuninn.github.io",
-  micrositeBaseUrl := "/scala-md-tag",
-  micrositeHomepage := "https://plmuninn.github.io/scala-md-tag/",
-  micrositeAuthor := "Maciej Romański Muninn Software",
-  micrositeGithubOwner := "plmuninn",
-  micrositeGithubRepo := "scala-md-tag",
-  micrositeHighlightTheme := "atom-one-light",
-  micrositePushSiteWith := GHPagesPlugin,
-  micrositeCompilingDocsTool := WithMdoc
+sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
+sonatypeCredentialHost := "s01.oss.sonatype.org"
+
+// Your profile name of the sonatype account. The default is the same with the organization value
+publishMavenStyle := true
+
+publishArtifact in Test := false
+
+sonatypeProfileName := "io.github.alexyavo"
+
+pomIncludeRepository := { _ => false }
+
+pgpPassphrase := Some(sys.env.getOrElse("GPG_PASSWORD", default = "").toArray)
+
+scmInfo := Some(
+  ScmInfo(
+    url("https://github.com/alexyavo/scala-md-tag"),
+    "scm:git@github.alexyavo/scala-md-tag.git"
+  )
 )
 
-lazy val publishSettings = Seq(
-  homepage := Some(url(s"https://github.com/$username/$repo")),
-  licenses += "MIT" -> url(s"https://github.com/$username/$repo/blob/master/LICENSE"),
-  scmInfo := Some(ScmInfo(url(s"https://github.com/$username/$repo"), s"git@github.com:$username/$repo.git")),
-  apiURL := Some(url(s"https://$username.github.io/$repo/latest/api/")),
-  releasePublishArtifactsAction := PgpKeys.publishSigned.value,
-  developers := List(
-    Developer(
-      id = username,
-      name = "Maciej Romanski",
-      email = "maciej.loki.romanski@gmail.com",
-      url = new URL(s"http://github.com/$username")
-    )
-  ),
-  publishMavenStyle := true,
-  publishArtifact in Test := false,
-  publishTo := Some(if (isSnapshot.value) Opts.resolver.sonatypeSnapshots else Opts.resolver.sonatypeStaging),
-//   Following 2 lines need to get around https://github.com/sbt/sbt/issues/4275
-  publishConfiguration := publishConfiguration.value.withOverwrite(true),
-  publishLocalConfiguration := publishLocalConfiguration.value.withOverwrite(true),
-  updateOptions := updateOptions.value.withGigahorse(false)
+import xerial.sbt.Sonatype._
+
+sonatypeProjectHosting := Some(GitHubHosting(user="alexyavo", repository="scala-md-tag", email="alxndr.yav@gmail.com"))
+
+licenses := Seq("BSD3" -> url("https://opensource.org/licenses/MIT"))
+
+developers := List(
+  Developer(id = "alexyavo", name = "Alex Y", url = url("https://github.com/alexyavo"), email="alxndr.yav@gmail.com")
 )
+
+publishTo := sonatypePublishToBundle.value

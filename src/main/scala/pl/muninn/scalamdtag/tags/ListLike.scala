@@ -10,7 +10,7 @@ object UnsortedList {
   implicit val renderUnsortedList: Renderer[UnsortedList] = {
     case UnsortedList(values) =>
       values.foldLeft("") {
-        case (acc, value: ListLike) => acc + "   " + value.rendered.lines.mkString("\n   ")
+        case (acc, value: ListLike) => acc + "   " + value.rendered.lines.toArray.mkString("\n   ")
         case (acc, value)           => acc + s"* ${value.rendered}\n"
       }
   }
@@ -22,7 +22,7 @@ object MarkdownList {
   implicit val renderList: Renderer[MarkdownList] = {
     case MarkdownList(values) =>
       values.zip(Stream.from(1)).foldLeft("") {
-        case (acc, (value: ListLike, _)) => acc + "   " + value.rendered.lines.mkString("\n   ")
+        case (acc, (value: ListLike, _)) => acc + "   " + value.rendered.lines.toArray.mkString("\n   ")
         case (acc, (value, index))       => acc + s"$index. ${value.rendered}\n"
       }
   }

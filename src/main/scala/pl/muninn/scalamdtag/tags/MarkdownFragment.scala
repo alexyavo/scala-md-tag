@@ -1,7 +1,7 @@
 package pl.muninn.scalamdtag.tags
 
 case class MarkdownFragment(tags: Iterable[MarkdownTag]) extends MarkdownTag {
-  val isMultiline = rendered.lines.length > 1
+  val isMultiline = rendered.lines.count() > 1
   val canBeInSameLine = isMultiline
   val shouldEndWithNewLine = isMultiline
 }
