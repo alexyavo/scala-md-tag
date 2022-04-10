@@ -32,10 +32,8 @@ val defaultSettings = Seq(
   scalacOptions := compilerOptions
 )
 
-val scalaTestVersion = "3.2.11"
-
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % scalaTestVersion % "test"
+  "org.scalatest" %% "scalatest" % "3.2.11" % "test"
 )
 
 
@@ -66,7 +64,7 @@ import xerial.sbt.Sonatype._
 
 sonatypeProjectHosting := Some(GitHubHosting(user="alexyavo", repository="scala-md-tag", email="alxndr.yav@gmail.com"))
 
-licenses := Seq("BSD3" -> url("https://opensource.org/licenses/MIT"))
+licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT"))
 
 developers := List(
   Developer(id = "alexyavo", name = "Alex Y", url = url("https://github.com/alexyavo"), email="alxndr.yav@gmail.com")
