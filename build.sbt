@@ -1,6 +1,6 @@
 name := "scsala-md-tag"
 
-version := "0.3.2"
+version := "0.3.3"
 
 organization := "io.github.alexyavo"
 
