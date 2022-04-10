@@ -1,38 +1,35 @@
-name := "scala-md-tag"
+name := "scsala-md-tag"
 
-version := "0.3.1"
-
-scalaVersion := "2.13.8"
+version := "0.3.2"
 
 organization := "io.github.alexyavo"
 
-val compilerOptions = Seq(
-  "-deprecation",
-  "-encoding",
-  "UTF-8",
-  "-feature",
-  "-language:existentials",
-  "-language:higherKinds",
+// scala versions and options
+
+scalaVersion := "2.13.8"
+
+pgpPassphrase := Some(sys.env.getOrElse("GPG_PASSWORD", default = "").toArray)
+
+scalacOptions ++= Seq(
   "-unchecked",
-  "-Ywarn-dead-code",
-  "-Ywarn-numeric-widen",
-  "-Xfuture",
-  "-Ywarn-unused-import",
-  "-Ypartial-unification",
-  "-Xfatal-warnings"
+  "-deprecation",
+  "-Xlint",
+  "-Xverify",
+  "-encoding", "UTF-8",
+  "-feature",
+  "-language:postfixOps"
 )
 
-resolvers ++= Seq(
-  Resolver.sonatypeRepo("releases"),
-  Resolver.sonatypeRepo("snapshots")
+javacOptions ++= Seq("-Xlint:unchecked", "-Xlint:deprecation")
+
+// dependencies
+
+libraryDependencies ++= Seq (
+  "org.scalatest"  %% "scalatest" % "3.0.8"  % Test
 )
 
-libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.2.11" % "test"
-)
+resolvers ++= Seq(Resolver.sonatypeRepo("public"))
 
-
-// --------------------------------------------------
 
 sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
 sonatypeCredentialHost := "s01.oss.sonatype.org"
