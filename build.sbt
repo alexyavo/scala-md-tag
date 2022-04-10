@@ -1,6 +1,6 @@
 name := "scala-md-tag"
 
-version := "0.3.0"
+version := "0.3.1"
 
 scalaVersion := "2.13.8"
 
@@ -23,13 +23,6 @@ val compilerOptions = Seq(
 resolvers ++= Seq(
   Resolver.sonatypeRepo("releases"),
   Resolver.sonatypeRepo("snapshots")
-)
-
-val defaultSettings = Seq(
-  version := "0.3.0",
-  scalaVersion := "2.13.8",
-  organization := "io.github.alexyavo",
-  scalacOptions := compilerOptions
 )
 
 libraryDependencies ++= Seq(
