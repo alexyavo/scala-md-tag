@@ -1,6 +1,6 @@
-name := "scsala-md-tag"
+name := "scala-md-tag"
 
-version := "0.3.3"
+version := "0.3.5"
 
 organization := "io.github.alexyavo"
 
