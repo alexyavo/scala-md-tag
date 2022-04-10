@@ -4,6 +4,8 @@ version := "0.3.1"
 
 scalaVersion := "2.13.8"
 
+organization := "io.github.alexyavo"
+
 val compilerOptions = Seq(
   "-deprecation",
   "-encoding",
